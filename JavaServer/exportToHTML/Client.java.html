@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Client.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Client.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span>java.io.IOException;
+<span class="s0">import </span>java.io.InputStream;
+<span class="s0">import </span>java.io.OutputStream;
+<span class="s0">import </span>java.net.Socket;
+
+
+
+<span class="s2">/* 
+ * 实现TCP客户端，接收到服务器 
+ * 和服务器实现数据交换 
+ * 实现TCP客户端程序的类 java.net.Socket 
+ * 
+ * 构造方法： 
+ *         Socket(String host,int port) 传服务器IP和端口号 
+ *         注意：构造方法只要运行，就会和服务器进行连接，连接失败，抛出异常 
+ * 
+ *         OutputStream getOutputStream() 返回套接字的输出流 
+ *             作用：将数据输出，输出到服务器 
+ * 
+ *         InputStream getInputStream() 返回套接字的输入流 
+ *             作用：从服务端读取数据 
+ * 
+ *         客户端服务器数据交换，必须使用套接字对象Socket中的获取的IO流，自己new流，不行 
+ */</span>
+<span class="s0">public class </span>Client {
+    <span class="s0">public static void </span>main(String[] args) <span class="s0">throws </span>IOException{
+        <span class="s2">//创建Socket对象，连接服务器</span>
+        Socket socket=<span class="s0">new </span>Socket(<span class="s3">&quot;127.0.0.1&quot;</span>,<span class="s4">8888</span>);
+        <span class="s2">//通过客户端的套接字对象Socket方法，获取字节输出流，将数据写向服务器</span>
+        OutputStream out=socket.getOutputStream();
+        out.write(<span class="s3">&quot;服务器你好！&quot;</span>.getBytes());
+
+        <span class="s2">//读取服务器发回的数据，使用socket套接字对象中的字节输入流</span>
+        InputStream in=socket.getInputStream();
+        <span class="s0">byte</span>[] data=<span class="s0">new byte</span>[<span class="s4">1024</span>];
+        <span class="s0">int </span>len=in.read(data);
+        System.out.println(<span class="s0">new </span>String(data,<span class="s4">0</span>,len));
+
+        socket.close();
+    }
+}</pre>
+</body>
+</html>
