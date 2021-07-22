@@ -8,7 +8,7 @@
 #include<sys/socket.h>
 #include<sys/wait.h>
  
-#define PORT 1500//端口号 
+#define PORT 8889//端口号 
 #define BACKLOG 5/*最大监听数*/ 
  
 int main(){
