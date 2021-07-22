@@ -24,7 +24,7 @@ int main(int argc ,char **argv){
 		A.sin_port = htons(atoi(argv[1])) ;
 	}
 		else
-	A.sin_port = htons(1234);
+	A.sin_port = htons(8889);
 	A.sin_addr.s_addr = htonl(INADDR_ANY) ;
 	bind(s_socket ,(struct sockaddr *)&A,sizeof(A));
 	listen(s_socket,5);
